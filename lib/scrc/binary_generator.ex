@@ -1,4 +1,5 @@
 defmodule Scrc.BinaryGenerator do
+  @moduledoc false
 
   def generate(payload, payload_prefix, payload_fields) do
 

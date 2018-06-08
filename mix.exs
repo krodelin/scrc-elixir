@@ -12,7 +12,7 @@ defmodule Scrc.MixProject do
       # Docs
       name: "SCRC",
       source_url: "https://github.com/krodelin/scrc-elixir",
-      homepage_url: "http://YOUR_PROJECT_HOMEPAGE",
+      homepage_url: "https://github.com/krodelin/scrc-elixir",
       docs: [
         main: "SCRC", # The main page in the docs
         # logo: "path/to/logo.png",
@@ -37,6 +37,21 @@ defmodule Scrc.MixProject do
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+    ]
+  end
+
+  defp description() do
+    "Elixir implementation of SCRC Client and Server"
+  end
+
+  defp package() do
+    [
+      name: "scrc",
+      maintainers: ["Udo Schneider"],
+      licenses: ["Apache 2.0"],
+      links: %{
+        "GitHub" => "https://github.com/krodelin/scrc-elixir"
+      }
     ]
   end
 end

@@ -1,5 +1,7 @@
 defmodule Scrc do
-  @moduledoc false
+  @moduledoc """
+  SCRC
+  """
 
   require Logger
 
