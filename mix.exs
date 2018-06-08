@@ -16,7 +16,7 @@ defmodule Scrc.MixProject do
       source_url: "https://github.com/krodelin/scrc-elixir",
       homepage_url: "https://github.com/krodelin/scrc-elixir",
       docs: [
-        main: "SCRC", # The main page in the docs
+        main: "readme", # The main page in the docs
         # logo: "path/to/logo.png",
         extras: ["README.md"]
       ]

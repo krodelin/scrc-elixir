@@ -1,4 +1,5 @@
 defmodule Scrc.BinaryGenerator do
+  # This is the BinaryGenerator module. It implements creating of SCRC data data and fields/prefix information.
   @moduledoc false
 
   def generate(payload, payload_prefix, payload_fields) do
@@ -6,8 +7,7 @@ defmodule Scrc.BinaryGenerator do
     prefix = case payload_prefix do
       nil ->
         ""
-      {key, type, _}
-      ->
+      {key, type, _} ->
         generate_value(Map.get(payload, key), type)
     end
 

@@ -1,5 +1,8 @@
 defmodule Scrc.SampleDriver do
-  @moduledoc false
+  @moduledoc """
+  SampleDriver implements a sample driver based on the [snakeoil](http://xed.ch/project/snakeoil/index.html) example driver.
+  It's not fast, it's not nice but it does make it around the track.
+  """
 
   use Scrc.Driver
   alias Scrc.{InitData, SensorData, ActorData}
