@@ -1,4 +1,5 @@
 defmodule Scrc.DataClipper do
+  @moduledoc false
 
   def clip(%_{} = payload, payload_fields) do
 
@@ -37,9 +38,7 @@ defmodule Scrc.DataClipper do
   end
 
   defp clip_opts(value, [{:default, default} | t]) do
-    (if value == nil, do: default,
-                      else: value)
-    |> clip_opts(t)
+    clip_opts((if value == nil, do: default, else: value), t)
   end
 
   defp clip_opts(_value, [{key, _} | _t]) do

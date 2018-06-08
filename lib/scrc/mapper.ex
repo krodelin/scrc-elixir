@@ -24,7 +24,8 @@ defmodule Scrc.Mapper do
       def clip(data), do: Scrc.DataClipper.clip(data, @payload_fields)
 
       def new(values \\ %{}) do
-        Map.merge((%__MODULE__{}), values)
+        %__MODULE__{}
+        |> Map.merge(values)
         |> __MODULE__.process()
       end
 

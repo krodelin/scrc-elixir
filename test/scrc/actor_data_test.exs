@@ -41,17 +41,16 @@ defmodule ActorDataTest do
 
   test "clipping" do
 
-    actor_data = ActorData.new(
-                   %{
-                     gear: 7,
-                     steer: -2.0,
-                     brake: 2.0,
-                     clutch: 2.0,
-                     acceleration: 2.0,
-                     focus: -100.0,
-                     meta: 10
-                   }
-                 )
+    actor_data = %{
+                   gear: 7,
+                   steer: -2.0,
+                   brake: 2.0,
+                   clutch: 2.0,
+                   acceleration: 2.0,
+                   focus: -100.0,
+                   meta: 10
+                 }
+                 |> ActorData.new()
                  |> ActorData.clip()
 
     assert actor_data.acceleration == 1.0
