@@ -1,4 +1,4 @@
-defmodule InitDataTest do
+defmodule Scrc.InitDataTest do
   @moduledoc false
 
   use ExUnit.Case

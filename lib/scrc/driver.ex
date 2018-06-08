@@ -1,32 +1,57 @@
 defmodule Scrc.Driver do
-  @moduledoc false
+  @moduledoc """
+    Driver implements the framework to write custom drivers.
+    Simply `use` this module and implement `scrc_init` and `scrc_drive`.
+  """
+  @type name :: String.t
 
-  require Logger
   # Public interface
 
+  @doc """
+    Set the owning client.
+  """
+  @spec set_client(pid, pid) :: :ok
   def set_client(driver, client) do
-    Logger.debug(fn -> "Scrc.Driver.set_client(driver, client)" end)
     GenServer.cast(driver, {:set_client, client})
   end
 
+  @doc """
+    The client requests the initialization data.
+  """
+  @spec request_init_data(pid) :: :ok
   def request_init_data(driver) do
-    Logger.debug(fn -> "Scrc.Driver.request_init_data(driver)" end)
     GenServer.cast(driver, {:request_init_data})
   end
 
+  @doc """
+    The client recieved new sensor data for the driver to handle.
+  """
+  @spec handle_sensor_data(pid, Scrc.SensorData.t) :: :ok
   def handle_sensor_data(driver, sensor_data) do
     # Logger.debug(fn -> "Scrc.Driver.handle_sensor_data(driver, sensor_data)" end)
     GenServer.cast(driver, {:handle_sensor_data, sensor_data})
   end
 
+  @doc """
+    The client recieved identified payload for the driver to handle.
+  """
+  @spec handle_identified(pid) :: :ok
   def handle_identified(driver) do
     GenServer.cast(driver, :handle_identified)
   end
 
+  @doc """
+    The client recieved restart payload for the driver to handle.
+  """
+  @spec handle_restart(pid) :: :ok
   def handle_restart(driver) do
     GenServer.cast(driver, :handle_restart)
   end
 
+  @doc """
+    The client recieved shutdown payload for the driver to handle.
+  """
+  @spec handle_shutdown(pid) :: :ok
   def handle_shutdown(driver) do
     GenServer.cast(driver, :handle_shutdown)
   end

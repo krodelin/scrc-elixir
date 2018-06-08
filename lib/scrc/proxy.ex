@@ -1,6 +1,4 @@
 defmodule Scrc.Proxy do
-  @moduledoc false
-
 
 
   use GenServer
