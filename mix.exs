@@ -63,7 +63,9 @@ defmodule Scrc.MixProject do
   end
 
   defp package_files() do
-    ["VERSION"]
+    ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*", "VERSION"]
   end
+
+
 
 end
