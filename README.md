@@ -10,7 +10,7 @@ by adding `scrc` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:scrc, "~> 0.5.0"}
+    {:scrc, "~> 0.5.1"}
   ]
 end
 ```
