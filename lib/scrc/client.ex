@@ -5,10 +5,13 @@ defmodule Scrc.Client do
   """
 
   use GenServer
-
+  require Logger
   alias Scrc.{Driver, InitData, SensorData, ActorData}
 
   @timeout 10_000
+
+  @type option :: {:endpoint, Scrc.Server.endpoint} | {:driver, pid()}
+  @type options :: [option]
 
   # Public interface
 
@@ -55,8 +58,9 @@ defmodule Scrc.Client do
   @doc """
     Start a new client instance to the specified endpoint. Use provided driver process for controlling.
   """
-  @spec init(%{endpoint: Scrc.Server.endpoint, driver: pid}) :: map
-  def init(%{endpoint: {host, port}, driver: driver}) do
+  @spec init(options) :: map()
+  def init(args) do
+    %{endpoint: {host, port}, driver: driver} = Enum.into(args, %{})
     Driver.set_client(driver, self())
     {
       :ok,
