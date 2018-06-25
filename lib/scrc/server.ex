@@ -12,14 +12,19 @@ defmodule Scrc.Server do
   Endpoint consists of a hostname (or IP) and port combination.
   """
   @type endpoint :: {endpoint_host, endpoint_port}
+
   @typedoc """
   A hostname or IP Address.
   """
   @type endpoint_host :: String.t
+
   @typedoc """
   A TCP Port number (0-65535)
   """
   @type endpoint_port :: integer
+
+  @type option :: {:simulation, pid()} | {:port, endpoint_port}
+  @type options :: [option]
 
   # Public interface
 
@@ -66,11 +71,9 @@ defmodule Scrc.Server do
   @doc """
     Initialize the server with the given `simulation`. Listen on `port`.
   """
-  @spec init(%{simulation: pid, port: endpoint_port}) :: {
-                                                           :ok,
-                                                           %{simulation: pid, socket: any, endpoint: endpoint}
-                                                         }
-  def init(%{simulation: simulation, port: port}) do
+  @spec init(options) :: map()
+  def init(options) do
+    %{simulation: simulation, port: port} = Enum.into(options, %{})
     {
       :ok,
       %{
