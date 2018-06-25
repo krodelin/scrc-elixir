@@ -57,7 +57,12 @@ defmodule Scrc.MixProject do
       licenses: ["Apache 2.0"],
       links: %{
         "GitHub" => "https://github.com/krodelin/scrc-elixir"
-      }
+      },
+      files: package_files(),
     ]
+
+    defp package_files() do
+      ["VERSION"]
+    end
   end
 end
