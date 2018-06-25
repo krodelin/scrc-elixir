@@ -1,6 +1,11 @@
 defmodule Scrc.DataClipper do
+  # This is the DataClipper module. It implements clipping of SCRC data according to field specifications.
   @moduledoc false
 
+  @doc """
+    Clip the provided payload according to the field specifications.
+  """
+  @spec clip(struct, Scrc.Mapper.payload_fields) :: struct
   def clip(%_{} = payload, payload_fields) do
 
     clipped_fields = payload_fields

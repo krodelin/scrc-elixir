@@ -1,4 +1,4 @@
-defmodule ActorDataTest do
+defmodule Scrc.ActorDataTest do
   @moduledoc false
 
   use ExUnit.Case

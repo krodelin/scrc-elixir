@@ -1,13 +1,19 @@
 defmodule Scrc.ActorData do
   @moduledoc """
-  scrc.ActorData provides functions and the structure for SCRC actor data.
+  ActorData provides struct for SCRC actor data.
   """
 
-  @doc """
-  ## Examples
-
-  """
   use Scrc.Mapper
+
+  @type t :: %Scrc.ActorData{
+               gear: integer,
+               steer: float,
+               brake: float,
+               clutch: float,
+               acceleration: float,
+               focus: float,
+               meta: integer
+             }
 
   defstruct gear: 1,
             steer: 0.0,

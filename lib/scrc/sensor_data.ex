@@ -1,15 +1,34 @@
 defmodule Scrc.SensorData do
   @moduledoc """
-  scrc.SensorData provides functions and the structure for SCRC sensor data.
-  """
-
-  @doc """
-  ## Examples
-
+  SensorData provides the struct for SCRC sensor data.
   """
 
   use Scrc.Mapper
-  require Logger
+
+  @type t :: %Scrc.SensorData{
+               angle: :float,
+               current_lap_time: :float,
+               damage: :integer,
+               distance_from_start: :float,
+               distance_raced: :float,
+               fuel: :float,
+               gear: :integer,
+               last_lap_time: :float,
+               opponents: [:float,],
+               race_position: :integer,
+               rpm: :integer,
+               speed_x: :float,
+               speed_y: :float,
+               speed_z: :float,
+               acceleration_x: :float,
+               acceleration_y: :float,
+               acceleration_z: :float,
+               track: [:float,],
+               track_position: :float,
+               wheel_spin_velocity: {:float, :float, :float, :float, },
+               z: :float,
+               focus: {:float, :float, :float, :float, :float}
+             }
 
   defstruct angle: 0.0,
             current_lap_time: 0.0,
@@ -41,7 +60,7 @@ defmodule Scrc.SensorData do
             track_position: 0.0,
             wheel_spin_velocity: {0.0, 0.0, 0.0, 0.0},
             z: 0.0,
-            focus: {-1.0, -1.0, -1.0, -1.0, -1.0} #, timestamp: 0
+            focus: {-1.0, -1.0, -1.0, -1.0, -1.0}
 
   field "angle", :angle, :float
   field "curLapTime", :current_lap_time, :float
@@ -64,10 +83,10 @@ defmodule Scrc.SensorData do
   field "focus", :focus, {:float}
 
 
-  # def process(%__MODULE__{} = data) do
-  #   Map.put(data, :timestamp, :erlang.system_time(1_000_000_000))
-  # end
-
+  @doc """
+  Update fields based on current and previous data
+  """
+  @spec update_deltas(__MODULE__.t, __MODULE__.t) :: __MODULE__.t
   def update_deltas(%__MODULE__{} = new_data, %__MODULE__{} = old_data) do
     # delta_t = max(0.001, (new_data.timestamp - old_data.timestamp) / 1_000_000_000)
     delta_t = max(1 / 50, new_data.current_lap_time - old_data.current_lap_time)
