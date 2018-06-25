@@ -1,10 +1,14 @@
 defmodule Scrc.MixProject do
   use Mix.Project
 
+  @version Path.join(__DIR__, "VERSION")
+           |> File.read!()
+           |> String.trim()
+
   def project do
     [
       app: :scrc,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       description: description(),
