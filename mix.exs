@@ -60,9 +60,10 @@ defmodule Scrc.MixProject do
       },
       files: package_files(),
     ]
-
-    defp package_files() do
-      ["VERSION"]
-    end
   end
+
+  defp package_files() do
+    ["VERSION"]
+  end
+
 end
