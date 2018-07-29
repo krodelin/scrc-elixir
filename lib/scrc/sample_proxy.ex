@@ -1,6 +1,4 @@
 defmodule Scrc.Proxy do
-  @moduledoc false
-
 
 
   use GenServer
@@ -13,7 +11,7 @@ defmodule Scrc.Proxy do
   end
   # GenServer callbacks
 
-  def start_link(state, opts \\ []) do
+  def start_link(state, _opts \\ []) do
     GenServer.start_link(__MODULE__, state, name: :proxy)
   end
 

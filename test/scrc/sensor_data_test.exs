@@ -28,7 +28,6 @@ defmodule Scrc.SensorDataTest do
         speed_x: -0.00981201,
         speed_y: -0.000454448,
         speed_z: -0.000144506,
-        timestamp: 1_519_125_703_867,
         track: [7.33557, 7.48059, 7.87415, 8.5848, 9.75901, 11.7102, 15.1868, 22.3954,
           43.1582, 200.0, 19.2827, 10.1309, 7.05919, 5.55189, 4.69456, 4.17718, 3.8689,
           3.70813, 3.6676],
@@ -44,7 +43,6 @@ defmodule Scrc.SensorDataTest do
 
     data = SensorData.from_binary(context[:binary])
 
-    # assert data.timestamp == 42
     assert data.angle == 0.0245684
     assert data.current_lap_time == 83.016
     assert data.damage == 0

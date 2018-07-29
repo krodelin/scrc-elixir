@@ -1,12 +1,18 @@
 defmodule Scrc.MixProject do
   use Mix.Project
 
+  @version Path.join(__DIR__, "VERSION")
+           |> File.read!()
+           |> String.trim()
+
   def project do
     [
       app: :scrc,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
+      description: description(),
+      package: package(),
       deps: deps(),
 
       # Docs
@@ -14,7 +20,7 @@ defmodule Scrc.MixProject do
       source_url: "https://github.com/krodelin/scrc-elixir",
       homepage_url: "https://github.com/krodelin/scrc-elixir",
       docs: [
-        main: "SCRC", # The main page in the docs
+        main: "readme", # The main page in the docs
         # logo: "path/to/logo.png",
         extras: ["README.md"]
       ]
@@ -51,7 +57,15 @@ defmodule Scrc.MixProject do
       licenses: ["Apache 2.0"],
       links: %{
         "GitHub" => "https://github.com/krodelin/scrc-elixir"
-      }
+      },
+      files: package_files(),
     ]
   end
+
+  defp package_files() do
+    ["lib", "mix.exs", "README*", "VERSION"]
+  end
+
+
+
 end

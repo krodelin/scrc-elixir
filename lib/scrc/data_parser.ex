@@ -1,10 +1,11 @@
 defmodule Scrc.DataParser do
-  @moduledoc """
-    This is the DataParser module. It implements parsing of SCRC data into native types.
+  @moduledoc false
+  # This is the DataParser module. It implements parsing of SCRC data into native types.
+
+  @doc """
+  Parse the provided list of strings into native types according to the specified type.
   """
-
-  require Logger
-
+  @spec parse([String.t], Scrc.Mapper.type, any) :: [number]
   def parse(list, :float, _opts), do: parse_float_value(list)
 
   def parse(list, [:float], _opts), do: parse_float_values(list)
@@ -41,7 +42,7 @@ defmodule Scrc.DataParser do
   end
 
   defp to_number(string) when is_binary(string) do
-    {float, _} = Scrc.parse_number(string)
+    {float, _} = Scrc.Helper.parse_number(string)
     float
   end
 

@@ -1,6 +1,6 @@
-# Scrc
+# SCRC
 
-**TODO: Add description**
+**An Elixir Implementation of [imulated Car Racing Championship](https://arxiv.org/abs/1304.1672) Server and Client.**
 
 ## Installation
 
@@ -10,7 +10,7 @@ by adding `scrc` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:scrc, "~> 0.1.0"}
+    {:scrc, "~> 0.5.1"}
   ]
 end
 ```

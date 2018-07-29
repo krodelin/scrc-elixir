@@ -1,15 +1,10 @@
 defmodule Scrc.InitData do
-  @moduledoc false
-
-
   @moduledoc """
-  scrc.ActorData provides functions and the structure for SCRC init data.
+  InitData provides the struct for SCRC init data.
   """
 
-  @doc """
-  ## Examples
+  @type t :: %Scrc.InitData{name: String.t, angles: [float]}
 
-  """
   use Scrc.Mapper
 
   defstruct name: "SCR",

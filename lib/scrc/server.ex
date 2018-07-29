@@ -1,26 +1,61 @@
 defmodule Scrc.Server do
-  @moduledoc false
-
-
+  @moduledoc """
+  Server implements boilerplate code for implementing an SCRC Server.
+  It forwards the domain specific calls to it's `simulation`.
+  """
 
   use GenServer
   require Logger
   alias Scrc.{InitData, SensorData, ActorData}
 
+  @typedoc """
+  Endpoint consists of a hostname (or IP) and port combination.
+  """
+  @type endpoint :: {endpoint_host, endpoint_port}
+
+  @typedoc """
+  A hostname or IP Address.
+  """
+  @type endpoint_host :: String.t
+
+  @typedoc """
+  A TCP Port number (0-65535)
+  """
+  @type endpoint_port :: integer
+
+  @type option :: {:simulation, pid()} | {:port, endpoint_port}
+  @type options :: [option]
+
   # Public interface
 
+  @doc """
+    Send identified payload to client.
+  """
+  @spec send_identified(pid) :: :ok
   def send_identified(server) do
     GenServer.cast(server, :send_identified)
   end
 
+  @doc """
+    Send shutdown payload to client.
+  """
+  @spec send_shutdown(pid) :: :ok
   def send_shutdown(server) do
     GenServer.cast(server, :send_shutdown)
   end
 
+  @doc """
+    Send restart payload to client.
+  """
+  @spec send_restart(pid) :: :ok
   def send_restart(server) do
     GenServer.cast(server, :send_restart)
   end
 
+  @doc """
+    Send sensor payload to client.
+  """
+  @spec send_sensor_data(pid, Scrc.SensorData.t) :: :ok
   def send_sensor_data(server, sensor_data) do
     GenServer.cast(server, {:send_sensor_data, sensor_data})
   end
@@ -33,7 +68,12 @@ defmodule Scrc.Server do
     GenServer.start_link(__MODULE__, state, opts)
   end
 
-  def init(%{simulation: simulation, port: port}) do
+  @doc """
+    Initialize the server with the given `simulation`. Listen on `port`.
+  """
+  @spec init(options) :: map()
+  def init(options) do
+    %{simulation: simulation, port: port} = Enum.into(options, %{})
     {
       :ok,
       %{
