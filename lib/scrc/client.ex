@@ -62,15 +62,19 @@ defmodule Scrc.Client do
   def init(args) do
     %{endpoint: {host, port}, driver: driver} = Enum.into(args, %{})
     Driver.set_client(driver, self())
-    {
-      :ok,
-      %{
-        endpoint: {Scrc.Helper.gethostbyname(host), port},
-        socket: new_socket(),
-        driver: driver,
-        connection_state: :disconnected
-      }
-    }
+    case  Scrc.Helper.gethostbyname(host) do
+      {:ok, address} -> {
+                          :ok,
+                          %{
+                            endpoint: {address, port},
+                            socket: new_socket(),
+                            driver: driver,
+                            connection_state: :disconnected
+                          }
+                        }
+      {:error, message} -> {:stop, message}
+    end
+
   end
 
   def handle_cast(:connect_race, %{driver: driver} = state) do

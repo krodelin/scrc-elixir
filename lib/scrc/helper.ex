@@ -56,8 +56,11 @@ defmodule Scrc.Helper do
   end
 
   def gethostbyname(hostname) do
-    {:ok, socket_host} = Socket.Host.by_name(hostname)
-    [address | _] = socket_host.list
-    address
+    case Socket.Host.by_name(hostname) do
+      {:ok, socket_host} ->
+        [address | _] = socket_host.list
+        {:ok, address}
+      {:error, message} -> {:error, message}
+    end
   end
 end
